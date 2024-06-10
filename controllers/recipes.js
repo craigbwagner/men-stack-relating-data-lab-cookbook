@@ -12,4 +12,22 @@ router.get('/new', async (req, res) => {
 	res.render('recipes/new.ejs');
 });
 
+router.post('/create', async (req, res) => {
+	try {
+		const newRecipe = new Recipe(req.body);
+		newRecipe.owner = req.session.user._id;
+		await newRecipe.save();
+		res.redirect('/');
+	} catch (err) {
+		console.log(err);
+		res.redirect('/new');
+	}
+});
+
+// if (recipe.owner.equals(req.session.user._id)) {
+//     Proceed with edit or delete operation
+//   } else {
+//     Redirect or show an error message
+//   }
+
 module.exports = router;
