@@ -8,4 +8,8 @@ router.get('/', async (req, res) => {
 	res.render('recipes/index.ejs');
 });
 
+router.get('/new', async (req, res) => {
+	res.render('recipes/new.ejs');
+});
+
 module.exports = router;
