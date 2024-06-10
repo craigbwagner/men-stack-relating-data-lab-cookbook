@@ -8,5 +8,12 @@
 <body>
   <h1>My Recipes</h1>
   <a href='/recipes/new'>Add New Recipe</a>
+  <ul>
+    <% recipes.forEach(recipe => { %>
+      <li>
+        <a href='#'><%= recipe.name %></a>
+      </li>
+    <% }) %>
+  </ul>
 </body>
 </html>

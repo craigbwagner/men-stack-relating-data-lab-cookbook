@@ -5,7 +5,14 @@ const User = require('../models/user.js');
 const Recipe = require('../models/recipe.js');
 
 router.get('/', async (req, res) => {
-	res.render('recipes/index.ejs');
+    try {
+		// const currentUser = await User.findById(req.session.user._id);
+		const userRecipes = await Recipe.find({ owner: req.session.user._id });
+		res.render('recipes/index.ejs', { recipes: userRecipes });
+	} catch (err) {
+		console.log(err);
+		res.redirect('/');
+	}
 });
 
 router.get('/new', async (req, res) => {
