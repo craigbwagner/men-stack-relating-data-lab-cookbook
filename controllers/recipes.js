@@ -15,8 +15,18 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/new', async (req, res) => {
+router.get('/new', (req, res) => {
 	res.render('recipes/new.ejs');
+});
+
+router.get('/:recipeId', async (req, res) => {
+	try {
+		const currentRecipe = await Recipe.findById(req.params.recipeId);
+		res.render('recipes/show.ejs', { recipe: currentRecipe });
+	} catch (err) {
+		console.log(err);
+		res.redirect('/');
+	}
 });
 
 router.post('/create', async (req, res) => {
