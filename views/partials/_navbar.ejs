@@ -1,0 +1,8 @@
+<a href='/'>Home</a>
+<% if (user) { %>
+  <a href='/recipes/index'>View My Recipes</a>
+  <a href='/auth/sign-out'>Sign Out</a>
+<% } else { %>
+  <a href='/auth/sign-in.ejs'>Sign In</a>
+  <a href='/auth/sign-up.ejs'>Sign Up</a>
+<% } %>
