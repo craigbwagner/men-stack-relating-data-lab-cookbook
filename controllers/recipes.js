@@ -44,7 +44,7 @@ router.post('/create', async (req, res) => {
 		const newRecipe = new Recipe(req.body);
 		newRecipe.owner = req.session.user._id;
 		await newRecipe.save();
-		res.redirect('/');
+		res.redirect(`/ingredients/new/${newRecipe._id}`);
 	} catch (err) {
 		console.log(err);
 		res.redirect('/new');
@@ -67,7 +67,7 @@ router.delete('/:recipeId', async (req, res) => {
 	try {
 		const currentRecipe = await Recipe.findById(req.params.recipeId);
 		await currentRecipe.deleteOne();
-		res.redirect('recipes/index.ejs');
+		res.redirect('/recipes');
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
