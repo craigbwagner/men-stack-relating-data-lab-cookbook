@@ -14,5 +14,8 @@
   </ul>
   <h2>Instructions:</h2>
   <p><%= recipe.instructions %></p>
+  <form action='/recipes/<%= recipe._id %>?_method=DELETE' method='POST'>
+    <button type='submit'>Delete This Recipe</button>
+  </form>
 </body>
 </html>

@@ -41,6 +41,17 @@ router.post('/create', async (req, res) => {
 	}
 });
 
+router.delete('/:recipeId', async (req, res) => {
+	try {
+		const currentRecipe = await Recipe.findById(req.params.recipeId);
+		await currentRecipe.deleteOne();
+		res.redirect('recipes/index.ejs');
+	} catch (err) {
+		console.log(err);
+		res.redirect('/');
+	}
+});
+
 // if (recipe.owner.equals(req.session.user._id)) {
 //     Proceed with edit or delete operation
 //   } else {
