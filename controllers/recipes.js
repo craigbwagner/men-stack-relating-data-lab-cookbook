@@ -29,6 +29,16 @@ router.get('/:recipeId', async (req, res) => {
 	}
 });
 
+router.get('/:recipeId/edit', async (req, res) => {
+	try {
+		const currentRecipe = await Recipe.findById(req.params.recipeId);
+		res.render('recipes/edit.ejs', { recipe: currentRecipe });
+	} catch (err) {
+		console.log(err);
+		res.redirect('/');
+	}
+});
+
 router.post('/create', async (req, res) => {
 	try {
 		const newRecipe = new Recipe(req.body);
@@ -38,6 +48,18 @@ router.post('/create', async (req, res) => {
 	} catch (err) {
 		console.log(err);
 		res.redirect('/new');
+	}
+});
+
+router.put('/:recipeId', async (req, res) => {
+	try {
+		const currentRecipe = await Recipe.findById(req.params.recipeId);
+		currentRecipe.set(req.body);
+		await currentRecipe.save();
+		res.redirect('/');
+	} catch (err) {
+		console.log(err);
+		res.redirect('/');
 	}
 });
 
